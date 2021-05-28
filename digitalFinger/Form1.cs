@@ -74,7 +74,6 @@ namespace digitalFinger
             catch
             {
                 writeStatusMessage("Хурууны хээний зураг авах боломжгүй байна.");
-                //MessageBox.Show("Can't initiate capture operation!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         protected virtual void Process(DPFP.Sample Sample)
