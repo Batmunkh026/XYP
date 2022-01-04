@@ -64,18 +64,32 @@ namespace XYP.Controllers
                                     CitizenInfo idcard = (CitizenInfo)xmlser.Deserialize(sertext);
                                     try
                                     {
-                                        if (idcard.ResultCode == "0" || idcard.ResultCode == "1")
+                                        bool isSave = false;
+                                        switch (idcard.ResultCode)
+                                        {
+                                            case "0":
+                                                isSave = true;
+                                                break;
+                                            case "1":
+                                                isSave = true;
+                                                break;
+                                            default:
+                                                isSave = false;
+                                                break;
+                                        }
+                                        if (isSave)
                                         {
                                             response.isSuccess = true;
                                             response.resultMessage = "success";
                                             response.matched = idcard.citizenResponse.matched;
-                                            bool dbres = dbconn.idbCommand(xypQry.setReq(injson.customerFirstName, injson.customerLastName, injson.customerRegNo, idcard.citizenResponse.matched.ToString()));
-                                            LogWriter._service(TAG, string.Format("SET RESULT: [{0}]", dbres));
+                                            bool dbres = dbconn.idbCommand(xypQry.setReq(injson.customerFirstName, injson.customerLastName, injson.customerRegNo, idcard.citizenResponse.matched.ToString(), idcard.ResultCode));
+                                            LogWriter._service(TAG, $"[save] RESULT_CODE: [{idcard.ResultCode}] SET RESULT: [{dbres}]");
                                         }
                                         else
                                         {
                                             response.isSuccess = false;
                                             response.resultMessage = string.Format("[XYP] CODE: [{0}], MESSAGE: [{1}]", idcard.ResultCode, idcard.ResultMessage);
+                                            LogWriter._service(TAG, $"[nosave] RESULT_CODE: [{idcard.ResultCode}]");
                                         }
                                     }
                                     catch (Exception ex)

@@ -12,9 +12,9 @@ namespace XYP.Utils
             string qry = string.Format("SELECT FIRST_NAME, LAST_NAME, REG_NO, IS_MATCHED FROM XYP_MATCHED_LIST WHERE FIRST_NAME = '{0}' AND LAST_NAME = '{1}' AND REG_NO = '{2}' AND EXPIRE_DATE > SYSDATE ORDER BY CREATED_DATE DESC", fName.ToLower(), lName.ToLower(), regNo.ToLower());
             return qry;
         }
-        public static string setReq(string fName, string lName, string regNo, string match)
+        public static string setReq(string fName, string lName, string regNo, string match, string xypResult)
         {
-            string qry = string.Format("INSERT INTO XYP_MATCHED_LIST (FIRST_NAME, LAST_NAME, REG_NO, IS_MATCHED) VALUES ('{0}', '{1}', '{2}', '{3}')", fName.ToLower(), lName.ToLower(), regNo.ToLower(), match);
+            string qry = string.Format("INSERT INTO XYP_MATCHED_LIST (FIRST_NAME, LAST_NAME, REG_NO, IS_MATCHED, RESULT_CODE) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}')", fName.ToLower(), lName.ToLower(), regNo.ToLower(), match, xypResult);
             return qry;
         }
     }
