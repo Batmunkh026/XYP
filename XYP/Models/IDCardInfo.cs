@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Xml.Serialization;
-using System.Runtime.Serialization;
 
 namespace XYP.Models
 {
-    
     [XmlRoot("return")]
     public class IDCardInfo
     {
@@ -46,9 +44,9 @@ namespace XYP.Models
         [XmlElement("fingerprint")]
         public virtual string FingerPrint { get; set; }
         [XmlElement("regnum")]
-        public virtual string RegNum { get; set; }
-        [XmlElement("signature")]
-        public virtual string Signature { get; set; }
+      [XmlElement("signature")]
+           public virtual string RegNum { get; set; }
+       public virtual string Signature { get; set; }
     }
     [XmlRoot("operator")]
     public class Operator
